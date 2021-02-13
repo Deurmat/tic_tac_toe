@@ -21,20 +21,13 @@ class TicTacToe():
 
     def init_dimensions(self):
         while True:
-            columns = input("Please enter the number of columns for your Tic Tac Toe board?\n")
-            if columns.isdigit() and int(columns) > 1 and int(columns) < 11:
+            size = input("Please enter the size for your Tic Tac Toe board? e.g. 3 for 3x3 board\n")
+            if size.isdigit() and int(size) > 1 and int(size) < 11:
                 break
             else:
                 print("Please enter an integer between 2 and 10")
 
-        while True:
-            rows = input("Please enter the number of rows for your Tic Tac Toe board?\n")
-            if rows.isdigit() and int(rows) > 1 and int(rows) < 11:
-                break
-            else:
-                print("Please enter an integer between 2 and 10")
-
-        return int(columns), int(rows)
+        return int(size), int(size)
 
     def init_pieces(self, columns, rows):
         columns = ["-" for i in range(0, columns)]
@@ -97,6 +90,8 @@ class TicTacToe():
         selected_column = int(open_positions_coords[computer_choice].split(',')[1])
 
         self.pieces[(selected_column - 1)][(selected_row - 1)] = self.computer_piece
+
+        print("The computer has made a move...")
 
         return
 
@@ -192,6 +187,7 @@ class TicTacToe():
         print("\n")
         print(f"You will play with {self.player_piece}, the computer plays with {self.computer_piece}")
 
+        self.show_board()
         while True:
             self.player_turn()
             self.show_board()
